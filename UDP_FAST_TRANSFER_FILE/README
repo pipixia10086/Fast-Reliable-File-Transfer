@@ -1,0 +1,38 @@
+EE542 Lab 3 
+Team Member:
+Ziyan Yang
+Xueting Jin
+=================================================
+Introduction 
+in this lab we mainly focus on design a protocol so that we can obtain Fast, Reliable File transfer. TCP can indeed provide a reliable transmission service, but the speed of the transmission is not that idea comparing with UDP. in order to have both features: Fast and reliable, we designed a protocol that based on UDP data transmission structure (UDP socket structure), and then we added acknowledgements and retransmission features to it.
+=================================================
+how to compile
+1. we need two linux machines and using 1Gbps switch and ethernet cables to connect these two machines.
+
+2. add 200ms delay on both side, and total 20% loss by using the following command
+-sudo tc qdisc set dev enps0 root netter delay 200ms loss 10%
+or
+-sudo tc qdisc change dev enps0 root netter delay 200ms loss 10%
+
+3. ping server and client using following command
+on the client side:
+-ping 162.198.0.100
+
+one the server side:
+-ping 162.198.0.200
+
+(162.198.0.100 and 162.198.0.200 are the static IP address for server and client correspondingly.)
+
+4. after everything is set up, run the server side code first, waiting fo the connection from the client.
+----->make all
+----->./client
+----->./server
+
+5. run the client code, and request the file that you want to send, then the transmission between server and client will begin.
+
+6. when all the file transmission is done, you will see there is a text shows that the file transmission is successful.
+
+=================================================
+conclusion
+using our protocol, a big file (>= 1GB) can be transmitted successfully with at least speed of 200Mbps
+
